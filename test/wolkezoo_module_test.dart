@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:wlokezoo_module/wlokezoo_module.dart';
+import 'package:wolkezoo_module/wolkezoo_module.dart';
 
 void main() {
   test('adds one to input values', () {

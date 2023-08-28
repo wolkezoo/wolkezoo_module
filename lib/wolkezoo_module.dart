@@ -1,4 +1,4 @@
-library wlokezoo_module;
+library wolkezoo_module;
 
 /// A Calculator.
 class Calculator {

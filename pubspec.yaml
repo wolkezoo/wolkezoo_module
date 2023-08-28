@@ -1,5 +1,5 @@
-name: wlokezoo_module
-description: wlokezoo 通用组件
+name: wolkezoo_module
+description: wolkezoo 通用组件
 version: 0.0.2
 homepage: https://gitee.com/ee_lrg
 
@@ -12,7 +12,8 @@ dependencies:
     sdk: flutter
   get: ^4.6.5
   get_storage: ^2.1.1
-  flutter_screenutil: ^5.8.4
+  flutter_screenutil: ^5.9.0
+  loggy: ^2.0.3
 
 dev_dependencies:
   flutter_test:
