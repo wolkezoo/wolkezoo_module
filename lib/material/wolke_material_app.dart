@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:wolkezoo_module/extension/log_extension.dart';
 
@@ -42,12 +43,15 @@ class WolkeMaterialApp extends StatelessWidget {
         debugShowCheckedModeBanner: debugShowCheckedModeBanner,
         home: home,
         title: title,
-        builder: (context, widget) {
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-            child: widget!,
-          );
-        },
+        builder: (context, child) => Overlay(
+          initialEntries: [
+            if (child != null) ...[
+              OverlayEntry(
+                builder: (context) => child,
+              ),
+            ],
+          ],
+        ),
       ),
     );
   }

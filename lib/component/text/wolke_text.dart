@@ -28,18 +28,20 @@ FontWeight getFontWeight(FontWeightEnum enum0) {
 }
 
 // text widget
-Widget text(
-    {required String text,
-    double? size,
-    double? wordSpacing,
-    double? letterSpacing,
-    Color? color,
-    String? fontFamily,
-    FontWeightEnum? weight,
-    FontWeight? fontWeight,
-    bool? softWrap,
-    TextOverflow? overflow,
-    TextAlign? textAlign}) {
+Widget text({
+  required String text,
+  double? size,
+  double? wordSpacing,
+  double? letterSpacing,
+  Color? color,
+  String? fontFamily,
+  FontWeightEnum? weight,
+  FontWeight? fontWeight,
+  bool? softWrap,
+  TextOverflow? overflow,
+  TextAlign? textAlign,
+  TextBaseline? textBaseline,
+}) {
   return Text(
     text,
     softWrap: softWrap,
@@ -55,6 +57,7 @@ Widget text(
       fontWeight: fontWeight,
       softWrap: softWrap,
       overflow: overflow,
+      textBaseline: textBaseline,
     ),
   );
 }
@@ -70,6 +73,7 @@ TextStyle textStyle({
   FontWeight? fontWeight,
   bool? softWrap,
   TextOverflow? overflow,
+  TextBaseline? textBaseline,
 }) {
   assert(() {
     if (weight != null && fontWeight != null) {
@@ -92,5 +96,8 @@ TextStyle textStyle({
     fontWeight: fontWeight,
     wordSpacing: wordSpacing,
     letterSpacing: letterSpacing,
+    textBaseline: textBaseline,
   );
 }
+
+

@@ -3,8 +3,11 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flustars/flustars.dart';
-import 'package:wolkezoo_module/config/dio/interface_address_config.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:wolkezoo_module/extension/log_extension.dart';
+import 'package:wolkezoo_module/tools/date/date_tools.dart';
+import 'package:wolkezoo_module/tools/dio/config/interface_address_config.dart';
+import 'package:wolkezoo_module/tools/storage/storage_tools.dart';
 
 /// Dio 请求方法
 enum DioMethod {
@@ -42,6 +45,8 @@ class DioTools {
 
   /// 初始化Dio
   static void init({required InterfaceAddressConfig interfaceAddressConfig0}) {
+    // 检查接口配置
+    interfaceAddressConfig0.examineConfig();
     interfaceAddressConfig = interfaceAddressConfig0;
     _getInstance(showLoading: false);
   }
@@ -79,6 +84,23 @@ class DioTools {
         headers: interfaceAddressConfig.headers,
       ),
     );
+
+    // 配置请求日志
+    if (interfaceAddressConfig.openRequestLog) {
+      _dio!.interceptors.add(PrettyDioLogger(
+          request: interfaceAddressConfig.requestLogConfig.request,
+          requestBody: interfaceAddressConfig.requestLogConfig.requestBody,
+          requestHeader: interfaceAddressConfig.requestLogConfig.requestHeader,
+          responseHeader:
+              interfaceAddressConfig.requestLogConfig.responseHeader,
+          responseBody: interfaceAddressConfig.requestLogConfig.responseBody,
+          error: interfaceAddressConfig.requestLogConfig.error,
+          compact: interfaceAddressConfig.requestLogConfig.compact));
+    }
+    // 配置自定义拦截器
+    if (interfaceAddressConfig.interceptors.isNotEmpty) {
+      _dio!.interceptors.addAll(interfaceAddressConfig.interceptors);
+    }
     // _dio!.interceptors.add(TokenInterceptor());
     // _dio!.interceptors.add(OnErrorInterceptors());
     // _dio!.interceptors.add(PrettyDioLogger(
@@ -157,7 +179,7 @@ class DioTools {
   }
 
   /// post 请求
-  Future post({
+  Future<T> post<T>({
     required String url,
     Map<String, dynamic>? params,
     Map<String, dynamic>? header,
@@ -171,7 +193,7 @@ class DioTools {
     if (ObjectUtil.isEmpty(cancelToken)) {
       cancelToken = token;
     }
-    return await requestHttp(
+    return await requestHttp<T>(
       url,
       method: DioMethod.post,
       params: params,
@@ -193,7 +215,7 @@ class DioTools {
   }
 
   /// Dio request 方法
-  Future requestHttp(
+  Future<dynamic> requestHttp<T>(
     String url, {
     DioMethod method = DioMethod.get,
     Map<String, dynamic>? params,
@@ -218,11 +240,7 @@ class DioTools {
     //     "retryInterval": retryInterval ?? const Duration(seconds: 10)
     //   });
     // }
-    // 添加 token
-    // dynamic token = StorageTools().read(Storage.token)!;
-    // if (token.isNotEmpty && useToken!) {
-    //   _dio!.options.headers.addAll({'Authorization': 'Bearer $token'});
-    // }
+
     if (useUS!) {
       _dio!.options.headers.addAll({'accept-language': 'en-US'});
     } else {
@@ -231,6 +249,41 @@ class DioTools {
 
     if (header != null) {
       _dio!.options.headers.addAll(header);
+    }
+
+    /// 定义时间戳
+    /// 获取NTP时间
+    if (interfaceAddressConfig.openHeaderTimestamp) {
+      DateTime? sendTime = await DateTools.getNtpDateTime();
+
+      sendTime ??= DateTime.now();
+
+      // 定义时间戳
+      _dio!.options.headers.addAll({
+        interfaceAddressConfig.headerTimestampName:
+            sendTime.millisecondsSinceEpoch
+      });
+    }
+
+    // 添加 token
+    if (interfaceAddressConfig.openHeaderToken) {
+      dynamic token;
+      if (ObjectUtil.isNotEmpty(interfaceAddressConfig.tokenValue)) {
+        token = interfaceAddressConfig.tokenValue;
+      } else {
+        token = StorageTools().read(interfaceAddressConfig.tokenStorageName);
+      }
+      if (token.isNotEmpty && useToken!) {
+        String tokenSuffix =
+            ObjectUtil.isNotEmpty(interfaceAddressConfig.tokenHeaderSuffix)
+                ? "${interfaceAddressConfig.tokenHeaderSuffix} "
+                : '';
+        _dio!.options.headers.addAll(
+          {
+            interfaceAddressConfig.headerTokenName: '$tokenSuffix$token',
+          },
+        );
+      }
     }
 
     Response response;
@@ -278,11 +331,7 @@ class DioTools {
       // JSON 序列化, Response<dynamic> 转 Map<String, dynamic>
       var result = json.decode(
           (response.data is Map) ? json.encode(response.data) : response.data);
-      // PS: 取得 json 数据后, 只返回需要的数据，
-      // 如果数据没有在外面包一层 BaseModel, 直接返回就可以。
-      // var resultVo = R.from(result);
-      // return resultVo;
-      return result;
+      return interfaceAddressConfig.convertResponse.call(result);
     } else {
       return response;
     }

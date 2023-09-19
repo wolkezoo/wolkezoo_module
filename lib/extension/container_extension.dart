@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 // extension wight
-extension LogExtension on Widget {
+extension ContainerExtension on Widget {
   click({
     Function()? onTap,
     Function()? onDoubleTap,
-    Function()? onLongPress
+    Function()? onLongPress,
   }) {
     return GestureDetector(
       onLongPress: onLongPress,
