@@ -37,6 +37,7 @@ dependencies:
   # 精准网络时间
   ntp: ^2.0.0
   intl: ^0.18.1
+  get_time_ago: ^1.2.5
 
   # 权限获取
   permission_handler: ^10.4.3
@@ -49,6 +50,10 @@ dependencies:
 
   # 动画底部导航栏
   animated_bottom_navigation_bar: ^1.2.0
+
+  # 文件选择
+  file_picker: ^5.5.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,13 +1,15 @@
 # This is a generated file; do not edit or check into version control.
 connectivity_plus=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/connectivity_plus-4.0.2/
+file_picker=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/file_picker-5.5.0/
 flutter_jailbreak_detection=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/flutter_jailbreak_detection-1.10.0/
 flutter_network_connectivity=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/flutter_network_connectivity-0.0.6/
+flutter_plugin_android_lifecycle=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/flutter_plugin_android_lifecycle-2.0.16/
 fluttertoast=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/fluttertoast-8.2.2/
-path_provider=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/path_provider-2.1.0/
-path_provider_android=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/path_provider_android-2.1.0/
-path_provider_foundation=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/path_provider_foundation-2.3.0/
-path_provider_linux=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/path_provider_linux-2.2.0/
-path_provider_windows=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/path_provider_windows-2.2.0/
+path_provider=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/path_provider-2.1.1/
+path_provider_android=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/path_provider_android-2.2.0/
+path_provider_foundation=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/path_provider_foundation-2.3.1/
+path_provider_linux=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/path_provider_linux-2.2.1/
+path_provider_windows=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/path_provider_windows-2.2.1/
 permission_handler=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/permission_handler-10.4.5/
 permission_handler_android=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/permission_handler_android-10.3.6/
 permission_handler_apple=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/permission_handler_apple-9.1.4/

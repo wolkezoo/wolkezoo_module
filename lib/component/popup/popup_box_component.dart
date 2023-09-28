@@ -19,7 +19,7 @@ class PopupBoxComponent {
     Color? buttonColor,
     Color? cancelTextColor,
     Color? confirmTextColor,
-    bool? barrierDismissible
+    bool? barrierDismissible,
   }) =>
       Get.defaultDialog(
         title: title,
@@ -41,4 +41,49 @@ class PopupBoxComponent {
         cancelTextColor: cancelTextColor ?? Colors.black,
         barrierDismissible: barrierDismissible ?? true,
       );
+
+  static openCustomPopupBox(
+    List<Widget> widget, {
+    AlignmentGeometry alignment = Alignment.bottomCenter,
+    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.end,
+    Color backgroundColor = Colors.white,
+    EdgeInsetsGeometry? margin,
+    bool barrierDismissible = true,
+  }) async {
+    margin ??= EdgeInsets.only(left: 15.w, right: 15.w, bottom: 15.w);
+    return await Get.dialog(
+      Stack(
+        children: [
+          Align(
+            alignment: alignment,
+            child: Column(
+              mainAxisAlignment: mainAxisAlignment,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: double.infinity,
+                  margin: margin,
+                  padding: EdgeInsets.all(20.r),
+                  decoration: BoxDecoration(
+                    color: backgroundColor,
+                    borderRadius: BorderRadius.circular(15.r),
+                  ),
+                  child: Material(
+                    color: backgroundColor,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: widget,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+      barrierDismissible: barrierDismissible,
+    );
+  }
 }

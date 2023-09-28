@@ -1,3 +1,5 @@
+import 'package:flustars/flustars.dart';
+import 'package:get_time_ago/get_time_ago.dart';
 import 'package:intl/intl.dart';
 import 'package:ntp/ntp.dart';
 import 'package:wolkezoo_module/extension/log_extension.dart';
@@ -36,11 +38,9 @@ class DateTools {
         // 获取随机lookUpAddress
         DateTime dateTime = await NTP
             .now(
-              lookUpAddress: lookUpAddress[
-                  RandomTools.generateRandomInt(0, lookUpAddress.length - 1)],
+              lookUpAddress: lookUpAddress[RandomTools.generateRandomInt(0, lookUpAddress.length - 1)],
             )
-            .timeout(const Duration(milliseconds: 2000),
-                onTimeout: () => DateTime(1999));
+            .timeout(const Duration(milliseconds: 2000), onTimeout: () => DateTime(1999));
         if (dateTime.year != 1999) {
           return dateTime;
         }
@@ -61,5 +61,10 @@ class DateTools {
   /// format dateTime
   static String format({required DateTime date, required String format}) {
     return DateFormat(format).format(date);
+  }
+
+  /// 时间前
+  static String timeAgo(DateTime time, {String local = "zh", String pattern = "yyyy/MM/dd"}) {
+    return GetTimeAgo.parse(time, locale: local, pattern: pattern);
   }
 }

@@ -10,6 +10,8 @@ import 'package:wolkezoo_module/wolkezoo_module.dart';
 
 void main() {
   test('adds one to input values', () async {
+    print('Date >> ${DateTools.timeAgo(DateTime.now())}');
+
     // print("Permission.storage >> ${Permission.storage.toString() == "Permission.storage"}");
     // DateTime startDate = await NTP.now(
     //   lookUpAddress: "ntp.ntsc.ac.cn"
