@@ -10,9 +10,10 @@ Widget textRich({
       children: richs
           .map(
             (text) => TextSpan(
-                text: text.text,
-                style: text.style,
-                recognizer: TapGestureRecognizer()..onTap = text.onTap),
+              text: text.text,
+              style: text.style,
+              recognizer: TapGestureRecognizer()..onTap = text.onTap,
+            ),
           )
           .toList(),
     ),

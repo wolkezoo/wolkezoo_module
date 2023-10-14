@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:wolkezoo_module/component/text/wolke_text.dart';
 
 class PopupBoxComponent {
-  static openPopupBox({
+  static Future<T?> openPopupBox<T>({
     required String title,
     Color? titleTextColor,
     double? titleTextSize,
@@ -20,8 +20,8 @@ class PopupBoxComponent {
     Color? cancelTextColor,
     Color? confirmTextColor,
     bool? barrierDismissible,
-  }) =>
-      Get.defaultDialog(
+  }) async =>
+      await Get.defaultDialog<T>(
         title: title,
         titleStyle: textStyle(
           color: titleTextColor,
@@ -42,7 +42,7 @@ class PopupBoxComponent {
         barrierDismissible: barrierDismissible ?? true,
       );
 
-  static openCustomPopupBox(
+  static Future<T?>  openCustomPopupBox<T>(
     List<Widget> widget, {
     AlignmentGeometry alignment = Alignment.bottomCenter,
     MainAxisAlignment mainAxisAlignment = MainAxisAlignment.end,
@@ -51,7 +51,7 @@ class PopupBoxComponent {
     bool barrierDismissible = true,
   }) async {
     margin ??= EdgeInsets.only(left: 15.w, right: 15.w, bottom: 15.w);
-    return await Get.dialog(
+    return await Get.dialog<T>(
       Stack(
         children: [
           Align(

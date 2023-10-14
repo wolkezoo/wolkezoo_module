@@ -19,6 +19,11 @@ Future to({
 // back page
 void back<T>({T? result}) => Get.back(result: result);
 
+// back more page
+void moreBack<T>({required int step, T? result}) => {
+      for (int i = 0; i < step; i++) {Get.back(result: result)}
+    };
+
 // Exit the current interface and jump to another page
 Future off({
   required Widget page,

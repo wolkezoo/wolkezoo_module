@@ -18,7 +18,7 @@ class IdTools {
 
   // 生成快速uuid
   static String fastUuid(){
-    return _uuid.v6();
+    return _uuid.v4();
   }
 
   // 生成快速uuid，并清空中间横杆

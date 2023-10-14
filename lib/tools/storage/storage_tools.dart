@@ -15,8 +15,10 @@ class StorageTools {
     _box = GetStorage();
   }
 
+  GetStorage get box => _box;
+
   /// 存储
-  void write(key, value) => _box.write(key, value);
+  Future<void> write(key, value) async => await _box.write(key, value);
 
   /// 读取
   dynamic read(key) => _box.read(key) ?? "";

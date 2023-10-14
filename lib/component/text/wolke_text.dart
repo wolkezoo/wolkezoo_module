@@ -1,5 +1,13 @@
+import 'package:ellipsized_text/ellipsized_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Ellipsis types
+enum EllipsisTextType {
+  start,
+  middle,
+  end;
+}
 
 // font weight common enum
 enum FontWeightEnum { bold, semiBold, medium, light, normal }
@@ -27,6 +35,43 @@ FontWeight getFontWeight(FontWeightEnum enum0) {
   return fontWeight;
 }
 
+Widget textSplit({
+  required String text,
+  double? size,
+  double? wordSpacing,
+  double? letterSpacing,
+  Color? color,
+  String? fontFamily,
+  FontWeightEnum? weight,
+  FontWeight? fontWeight,
+  bool? softWrap,
+  TextOverflow? overflow,
+  TextAlign? textAlign,
+  TextBaseline? textBaseline,
+  double? height,
+  EllipsisTextType? ellipsisType,
+  String? ellipsis,
+}) {
+  return EllipsizedText(
+    text,
+    ellipsis: ellipsis ?? "...",
+    type: EllipsisType.fromString(ellipsisType != null ? ellipsisType.name : EllipsisType.end.name),
+    style: textStyle(
+      size: size,
+      wordSpacing: wordSpacing,
+      letterSpacing: letterSpacing,
+      color: color,
+      fontFamily: fontFamily,
+      weight: weight,
+      fontWeight: fontWeight,
+      softWrap: softWrap,
+      overflow: overflow,
+      textBaseline: textBaseline,
+      height: height,
+    ),
+  );
+}
+
 // text widget
 Widget text({
   required String text,
@@ -41,6 +86,7 @@ Widget text({
   TextOverflow? overflow,
   TextAlign? textAlign,
   TextBaseline? textBaseline,
+  double? height,
 }) {
   return Text(
     text,
@@ -58,6 +104,7 @@ Widget text({
       softWrap: softWrap,
       overflow: overflow,
       textBaseline: textBaseline,
+      height: height,
     ),
   );
 }
@@ -74,6 +121,7 @@ TextStyle textStyle({
   bool? softWrap,
   TextOverflow? overflow,
   TextBaseline? textBaseline,
+  double? height,
 }) {
   assert(() {
     if (weight != null && fontWeight != null) {
@@ -97,7 +145,6 @@ TextStyle textStyle({
     wordSpacing: wordSpacing,
     letterSpacing: letterSpacing,
     textBaseline: textBaseline,
+    height: height,
   );
 }
-
-

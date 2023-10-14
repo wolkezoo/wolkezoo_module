@@ -133,7 +133,7 @@ class DioTools {
   }
 
   /// get请求
-  Future get({
+  Future<T> get<T>({
     /// 请求地址
     required String url,
 

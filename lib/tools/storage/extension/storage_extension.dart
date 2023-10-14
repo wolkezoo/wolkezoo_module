@@ -4,8 +4,8 @@ import 'package:wolkezoo_module/tools/storage/storage_tools.dart';
 /// 缓存扩展类
 extension StorageExtension on String {
   /// 写入缓存
-  writeStorage({required dynamic value}) {
-    StorageTools().write(this, value);
+  writeStorage({required dynamic value}) async {
+    await StorageTools().write(this, value);
   }
 
   /// 读取缓存

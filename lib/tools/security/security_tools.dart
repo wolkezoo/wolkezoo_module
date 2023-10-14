@@ -4,10 +4,14 @@ import 'dart:io';
 import 'package:basic_utils/basic_utils.dart';
 import 'package:cryptography/cryptography.dart';
 import 'package:encrypt/encrypt.dart';
+import 'package:wolkezoo_module/extension/log_extension.dart';
 
 /// security tools
 /// contains encryption and decryption
 class SecurityTools {
+  // 偏移向量
+  static IV iv = IV.fromBase64("WB1R1Q/BAnyfyX1M1bx5QQ==");
+
   /// aes encode
   /// back base64 data
   static String encodeAes({
@@ -16,7 +20,6 @@ class SecurityTools {
     AESMode mode = AESMode.cbc,
   }) {
     final key = Key.fromBase64(encryptionKey);
-    final iv = IV.fromLength(16);
     final encrypted = Encrypter(AES(key, mode: mode));
     return encrypted.encrypt(encryptionData, iv: iv).base64;
   }
@@ -27,7 +30,6 @@ class SecurityTools {
     AESMode mode = AESMode.cbc,
   }) {
     final key = Key.fromBase64(encryptionKey);
-    final iv = IV.fromLength(16);
     final encrypted = Encrypter(AES(key, mode: mode));
     return encrypted.encryptBytes(encryptionDataByte, iv: iv).base64;
   }
@@ -42,7 +44,6 @@ class SecurityTools {
 
     // 构建加密基本数据
     final key = Key.fromBase64(encryptionKey);
-    final iv = IV.fromLength(16);
     final encrypted = Encrypter(AES(key, mode: mode));
 
     // 加密数据
@@ -60,7 +61,6 @@ class SecurityTools {
 
     // 构建加密基本数据
     final key = Key.fromBase64(encryptionKey);
-    final iv = IV.fromLength(16);
     final encrypted = Encrypter(AES(key, mode: mode));
 
     final encryptedBytes = encryptedFile.readAsBytesSync();
@@ -78,7 +78,6 @@ class SecurityTools {
     AESMode mode = AESMode.cbc,
   }) {
     final key = Key.fromBase64(encryptionKey);
-    final iv = IV.fromLength(16);
     final encrypted = Encrypter(AES(key, mode: mode));
     return encrypted.decrypt64(decodeData, iv: iv);
   }
