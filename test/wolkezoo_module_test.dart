@@ -1,23 +1,10 @@
-import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ntp/ntp.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:wolkezoo_module/tools/archive/archive_tools.dart';
-import 'package:wolkezoo_module/tools/date/date_tools.dart';
-import 'package:wolkezoo_module/tools/file/file_tools.dart';
-import 'package:wolkezoo_module/tools/id/id_tools.dart';
-import 'package:wolkezoo_module/tools/security/security_tools.dart';
-import 'package:wolkezoo_module/wolkezoo_module.dart';
+import 'package:wolkezoo_module/extension/log_extension.dart';
 
 void main() {
   test('adds one to input values', () async {
-    
+    print('${"a.abc".split('.').length}');
     // print("${".".split(".").last}");
-    Timer.periodic(const Duration(milliseconds: 1000), (timer) {
-      print("1111");
-    });
     // String aa = "123456";
     // String aa1 = SecurityTools.encodeAes(encryptionKey: "OH6FEa8khri4GVhdVq/PZPDAzTQnbYbG/X/i0FQY9fg=", encryptionData: aa);
     // print('aa1 >> $aa1');

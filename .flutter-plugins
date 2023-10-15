@@ -1,6 +1,6 @@
 # This is a generated file; do not edit or check into version control.
-connectivity_plus=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/connectivity_plus-5.0.0/
-file_picker=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/file_picker-5.5.0/
+connectivity_plus=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/connectivity_plus-5.0.1/
+file_picker=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/file_picker-6.0.0/
 flutter_jailbreak_detection=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/flutter_jailbreak_detection-1.10.0/
 flutter_network_connectivity=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/flutter_network_connectivity-0.0.6/
 flutter_plugin_android_lifecycle=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/flutter_plugin_android_lifecycle-2.0.16/
@@ -20,3 +20,4 @@ shared_preferences_foundation=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua
 shared_preferences_linux=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/shared_preferences_linux-2.3.1/
 shared_preferences_web=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/shared_preferences_web-2.2.1/
 shared_preferences_windows=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/shared_preferences_windows-2.3.1/
+video_thumbnail=/Users/guo/.pub-cache/hosted/mirrors.tuna.tsinghua.edu.cn%47dart-pub%47/video_thumbnail-0.5.3/

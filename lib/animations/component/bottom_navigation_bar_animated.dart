@@ -1,6 +1,5 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 typedef IndexedWidgetBuilder = Widget Function(int index, bool isActive);
 
