@@ -1,3 +1,4 @@
+import 'package:flustars/flustars.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:wolkezoo_module/component/widget/common_widget.dart';
@@ -14,11 +15,13 @@ extension ContainerExtension on Widget {
     Function()? onTap,
     Function()? onDoubleTap,
     Function()? onLongPress,
+    Function(LongPressEndDetails details)? onLongPressEnd,
     Function()? onLeftMove,
     Function()? onRightMove,
     Function(MoveDirection direction)? onMovePress,
     double leftMoveOffset = 120,
     double rightMoveOffset = -120,
+    HitTestBehavior? behavior,
   }) {
     Offset initialSwipeOffset = Offset.zero;
     Offset finalSwipeOffset = Offset.zero;
@@ -56,10 +59,12 @@ extension ContainerExtension on Widget {
     }
 
     return GestureDetector(
+      behavior: behavior,
       onHorizontalDragStart: onHorizontalDragStart,
       onHorizontalDragUpdate: onHorizontalDragUpdate,
       onHorizontalDragEnd: onHorizontalDragEnd,
       onLongPress: onLongPress,
+      onLongPressEnd: onLongPressEnd,
       onDoubleTap: onDoubleTap,
       onTap: onTap,
       child: this,
@@ -76,9 +81,43 @@ extension ContainerExtension on Widget {
     );
   }
 
+  Widget baseAnimatedShow({
+    required bool showExpression,
+    Widget? expressionFalseWidget,
+    Widget Function(Widget child, Animation<double> animation)? transitionBuilder,
+    Duration? animatedDuration,
+  }) {
+    return onShow(
+      showExpression: showExpression,
+      expressionFalseWidget: expressionFalseWidget,
+      closureAnimated: false,
+      transitionBuilder: transitionBuilder,
+      animatedDuration: animatedDuration,
+    );
+  }
+
   /// 控制是否显示
-  Widget onShow({required bool showExpression, Widget? expressionFalseWidget}) {
-    return showExpression ? this : expressionFalseWidget ?? obtainEmptyWidget;
+  Widget onShow({
+    required bool showExpression,
+    Widget? expressionFalseWidget,
+    bool closureAnimated = true,
+    Widget Function(Widget child, Animation<double> animation)? transitionBuilder,
+    Duration? animatedDuration,
+  }) {
+    if (closureAnimated) {
+      return showExpression ? this : expressionFalseWidget ?? obtainEmptyWidget;
+    }
+    return AnimatedSwitcher(
+      duration: animatedDuration ?? const Duration(milliseconds: 250),
+      transitionBuilder: transitionBuilder ??
+          (child, animation) {
+            return FadeTransition(
+              opacity: animation,
+              child: child,
+            );
+          },
+      child: showExpression ? this : expressionFalseWidget ?? obtainEmptyWidget,
+    );
   }
 
   /// forEach to widget

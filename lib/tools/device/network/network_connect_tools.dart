@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_network_connectivity/flutter_network_connectivity.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:wolkezoo_module/extension/log_extension.dart';
 import 'package:wolkezoo_module/tools/device/network/network_connect_state.dart';
 
 /// 网络连接工具
@@ -12,7 +13,7 @@ class NetworkConnectTools {
   static NetworkConnectTools? _instance;
 
   // 网络连接返回参数
-  Rx<NetworkConnectState> networkConnectState = NetworkConnectState().obs;
+  final Rx<NetworkConnectState> _networkConnectState = NetworkConnectState().obs;
 
   // 监听网络情况流
   late StreamSubscription networkChangeSubscription;
@@ -42,21 +43,25 @@ class NetworkConnectTools {
     // 注册网络监听器
     networkChangeSubscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       // "当前使用网络 >> $result".info;
-      networkConnectState..value.connectivityResult = result..refresh();
+
+      _networkConnectState..value.connectivityResult = ConnectivityResultEnum.convertConnectivityResult(result)..refresh();
+      if(result == ConnectivityResult.none) {
+        _networkConnectState..value.connectivityInternet = false..refresh();
+      }
     });
 
     // 注册网络是否可用监听器
     networkInternetSubscription = networkConnectivityExamine.getInternetAvailabilityStream().listen((isInternetAvailable) {
       // "检查网络是否可用 >> $isInternetAvailable".info;
-      networkConnectState..value.connectivityInternet = isInternetAvailable..refresh();
+      _networkConnectState..value.connectivityInternet = isInternetAvailable..refresh();
     });
   }
 
   // 动态检测网络可用性质方法
   Future<bool> isInternetConnectionAvailable() async {
     bool isNetworkConnectedOnCall = await networkConnectivityExamine.isInternetConnectionAvailable();
-    networkConnectState..value.connectivityInternet = isNetworkConnectedOnCall..refresh();
-    return networkConnectState.value.connectivityInternet;
+    _networkConnectState..value.connectivityInternet = isNetworkConnectedOnCall..refresh();
+    return _networkConnectState.value.connectivityInternet;
   }
 
   // 注销方法
@@ -65,4 +70,7 @@ class NetworkConnectTools {
     await networkInternetSubscription.cancel();
     await networkConnectivityExamine.unregisterAvailabilityListener();
   }
+
+  Rx<NetworkConnectState> get networkConnectState => _networkConnectState;
+
 }

@@ -12,12 +12,18 @@ class WolkeFormItem extends StatelessWidget {
   final Color? borderColor;
   final Color? fillColor;
   final EdgeInsets? outerRingPadding;
+  final EdgeInsets? contentPadding;
   final String? hintText;
   final double? hintTextSize;
   final Color? hintColor;
   final FontWeightEnum? hintFontWeight;
   final TextEditingController? controller;
   final Function(String)? onChange;
+  final Function(String)? onSubmitted;
+  final TextInputType? keyboardType;
+  final double? height;
+  final TextInputAction? textInputAction;
+  final int? maxLines;
 
   const WolkeFormItem({
     super.key,
@@ -31,6 +37,12 @@ class WolkeFormItem extends StatelessWidget {
     this.hintFontWeight,
     this.onChange,
     this.controller,
+    this.keyboardType,
+    this.height,
+    this.contentPadding,
+    this.textInputAction,
+    this.onSubmitted,
+    this.maxLines,
     EdgeInsets? outerRingPadding,
   }) : outerRingPadding =
             outerRingPadding ?? const EdgeInsets.only(left: 20, right: 20);
@@ -38,16 +50,21 @@ class WolkeFormItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: height,
       padding: outerRingPadding,
       child: TextField(
+        textInputAction: textInputAction,
         controller: controller,
         onChanged: onChange,
+        maxLines: maxLines,
         style: TextStyle(fontSize: 14.sp),
+        keyboardType: keyboardType,
+        onSubmitted: onSubmitted,
         decoration: InputDecoration(
           filled: true,
           fillColor: fillColor ?? Colors.white,
           labelStyle: TextStyle(fontSize: 14.sp),
-          contentPadding: EdgeInsets.only(left: 15.w, top: 2.h, bottom: 0),
+          contentPadding: contentPadding ?? EdgeInsets.only(left: 15.w, top: 2.h, bottom: 0),
           hintText: hintText,
           hintStyle: textStyle(
             size: hintTextSize,

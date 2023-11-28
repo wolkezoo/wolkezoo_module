@@ -22,10 +22,11 @@ class LoadingComponent {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                LoadingAnimationWidget.inkDrop(color: const Color(0xFF333333), size: 40.sp),
+                //LoadingAnimationWidget.beat(color: const Color(0xFF333333), size: 40.sp),
+                const CircularProgressIndicator(),
                 Container(
                   margin: EdgeInsets.only(top: 10.h),
-                  child: text(text: title, size: 12.sp, weight: FontWeightEnum.bold, color: const Color(0xFF333333)),
+                  child: text(text: title, size: 12.sp, weight: FontWeightEnum.bold, color: const Color(0xFF333333), decoration: TextDecoration.none),
                 )
               ],
             ),

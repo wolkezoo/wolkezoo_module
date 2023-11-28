@@ -71,6 +71,7 @@ class DioTools {
   DioTools._init() {
     _dio ??= Dio(
       BaseOptions(
+
         /// 请求基地址
         baseUrl: interfaceAddressConfig.baseUrl,
 
@@ -92,7 +93,7 @@ class DioTools {
           requestBody: interfaceAddressConfig.requestLogConfig.requestBody,
           requestHeader: interfaceAddressConfig.requestLogConfig.requestHeader,
           responseHeader:
-              interfaceAddressConfig.requestLogConfig.responseHeader,
+          interfaceAddressConfig.requestLogConfig.responseHeader,
           responseBody: interfaceAddressConfig.requestLogConfig.responseBody,
           error: interfaceAddressConfig.requestLogConfig.error,
           compact: interfaceAddressConfig.requestLogConfig.compact));
@@ -140,6 +141,9 @@ class DioTools {
     /// 请求参数
     Map<String, dynamic>? params,
 
+    // 请求头
+    Map<String, dynamic>? header,
+
     /// 是否使用token
     bool useToken = true,
 
@@ -165,16 +169,17 @@ class DioTools {
       cancelToken = token;
     }
     return await requestHttp(
-      url,
-      method: DioMethod.get,
-      params: params,
-      useToken: useToken,
-      useUS: useUs,
-      cancelToken: cancelToken,
-      isBaseModel: isBaseModel,
-      retryFunction: retryFunction,
-      retrySize: retrySize,
-      retryInterval: retryInterval,
+        url,
+        method: DioMethod.get,
+        params: params,
+        useToken: useToken,
+        useUS: useUs,
+        cancelToken: cancelToken,
+        isBaseModel: isBaseModel,
+        retryFunction: retryFunction,
+        retrySize: retrySize,
+        retryInterval: retryInterval,
+        header: header,
     );
   }
 
@@ -215,8 +220,7 @@ class DioTools {
   }
 
   /// Dio request 方法
-  Future<dynamic> requestHttp<T>(
-    String url, {
+  Future<dynamic> requestHttp<T>(String url, {
     DioMethod method = DioMethod.get,
     Map<String, dynamic>? params,
     Map<String, dynamic>? header,
@@ -261,7 +265,7 @@ class DioTools {
       // 定义时间戳
       _dio!.options.headers.addAll({
         interfaceAddressConfig.headerTimestampName:
-            sendTime.millisecondsSinceEpoch
+        sendTime.millisecondsSinceEpoch
       });
     }
 
@@ -275,9 +279,9 @@ class DioTools {
       }
       if (token.isNotEmpty && useToken!) {
         String tokenSuffix =
-            ObjectUtil.isNotEmpty(interfaceAddressConfig.tokenHeaderSuffix)
-                ? "${interfaceAddressConfig.tokenHeaderSuffix} "
-                : '';
+        ObjectUtil.isNotEmpty(interfaceAddressConfig.tokenHeaderSuffix)
+            ? "${interfaceAddressConfig.tokenHeaderSuffix} "
+            : '';
         _dio!.options.headers.addAll(
           {
             interfaceAddressConfig.headerTokenName: '$tokenSuffix$token',

@@ -13,4 +13,7 @@ class ObjectTools {
   static bool isEmpty(Object? object){
     return !isNotEmpty(object);
   }
+
+  // 安全转换
+  static T cast<T>(x, T defaultValue) => x is T ? x : defaultValue;
 }

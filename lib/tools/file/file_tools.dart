@@ -1,8 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
+import 'package:crypto/crypto.dart' as crypto;
 
+import 'package:basic_utils/basic_utils.dart';
 import 'package:crypto/crypto.dart';
 import 'package:wolkezoo_module/tools/dir/extension/dir_extension.dart';
+import 'package:xxh3/xxh3.dart';
 
 class FileTools {
   static Future<String?> getFileChecksumByPath({required String filePath}) async {
@@ -21,6 +25,37 @@ class FileTools {
       // NOTE: You might not need to convert it to base64
       return hash.toString();
     } catch (exception) {
+      return null;
+    }
+  }
+
+  static Future<String?> getStreamChecksum({required Stream<List<int>> stream}) async {
+    try {
+      final hash = await md5.bind(stream).first;
+      return hash.toString();
+    } catch(exception) {
+      return null;
+    }
+  }
+
+  static String? getStreamChecksumByCrypto({required List<int> byteList}) {
+    try {
+      final pieceMd5 = crypto.md5.convert(byteList).toString();
+      return pieceMd5;
+    } catch(exception) {
+      return null;
+    }
+  }
+
+  /// 计算文件xxhash值
+  static String? getFileXXHash({required File file}) {
+    try {
+      final stream = file.readAsBytesSync();
+      ByteData xxh3Unit8 = ByteData(8)
+        ..setUint64(0, xxh3(stream));
+       return HexUtils.encode(xxh3Unit8.buffer.asUint8List(0));
+    } catch(exception) {
+      print(exception);
       return null;
     }
   }

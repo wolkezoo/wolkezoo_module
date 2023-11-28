@@ -3,6 +3,7 @@ import 'package:get_time_ago/get_time_ago.dart';
 import 'package:intl/intl.dart';
 import 'package:ntp/ntp.dart';
 import 'package:wolkezoo_module/extension/log_extension.dart';
+import 'package:wolkezoo_module/tools/object/object_tools.dart';
 import 'package:wolkezoo_module/tools/random/random_tools.dart';
 
 /// 时间工具
@@ -66,5 +67,18 @@ class DateTools {
   /// 时间前
   static String timeAgo(DateTime time, {String local = "zh", String pattern = "yyyy/MM/dd"}) {
     return GetTimeAgo.parse(time, locale: local, pattern: pattern);
+  }
+
+  static String formatDuration(Duration duration, {bool? simpleHours}) {
+    String hours = duration.inHours.toString().padLeft(2, '0');
+    String minutes = duration.inMinutes.remainder(60).toString().padLeft(2, '0');
+    String seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+    if (ObjectTools.isEmpty(hours)) {
+      return "$minutes:$seconds";
+    }
+    if(hours == "00" && simpleHours != null && simpleHours){
+      return "$minutes:$seconds";
+    }
+    return "$hours:$minutes:$seconds";
   }
 }

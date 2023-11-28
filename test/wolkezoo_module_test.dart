@@ -1,9 +1,19 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:wolkezoo_module/extension/log_extension.dart';
+import 'package:wolkezoo_module/tools/dio/dio_tools.dart';
+import 'package:wolkezoo_module/tools/file/file_tools.dart';
+import 'package:wolkezoo_module/tools/security/security_tools.dart';
 
 void main() {
   test('adds one to input values', () async {
-    print('${"a.abc".split('.').length}');
+    DioTools().get(url: "url");
+    //print(SecurityTools.decodeByAES(encryptionKey: "+hczLwkyDf0pwccrycU0Kn/4d7oiRWtGfMWwNbde5tE=", decodeData: "4WFScscSEOROzM435ntxfEDkN7KXUCixvA0bpWLlogdh82700tiInVjnF5aKSkdPgRsaHmHh+d9bSJbC4FAoNA=="));
+    // print(json.decode("{\"code\": 500, \"msg\": \"token已被顶下线\", \"data\": null}"));
+    // print(FileTools.getFileXXHash(file: File("/data/user/0/com.wolkezoo.app/cache/file_picker/dbebf805ceb9d7a11ad39d794fcf16ff_682679781549_v_1660986981552659.mp4")));
+    // print('${"a.abc".split('.').length}');
     // print("${".".split(".").last}");
     // String aa = "123456";
     // String aa1 = SecurityTools.encodeAes(encryptionKey: "OH6FEa8khri4GVhdVq/PZPDAzTQnbYbG/X/i0FQY9fg=", encryptionData: aa);

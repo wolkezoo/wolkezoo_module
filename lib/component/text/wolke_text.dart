@@ -51,6 +51,7 @@ Widget textSplit({
   double? height,
   EllipsisTextType? ellipsisType,
   String? ellipsis,
+  TextDecoration? decoration,
 }) {
   return EllipsizedText(
     text,
@@ -68,6 +69,7 @@ Widget textSplit({
       overflow: overflow,
       textBaseline: textBaseline,
       height: height,
+      decoration: decoration,
     ),
   );
 }
@@ -75,6 +77,7 @@ Widget textSplit({
 // text widget
 Widget text({
   required String text,
+  Key? key,
   double? size,
   double? wordSpacing,
   double? letterSpacing,
@@ -87,12 +90,17 @@ Widget text({
   TextAlign? textAlign,
   TextBaseline? textBaseline,
   double? height,
+  int? maxLines,
+  TextDecoration? decoration,
 }) {
   return Text(
     text,
     softWrap: softWrap,
     overflow: overflow,
     textAlign: textAlign,
+    key: key,
+    maxLines: maxLines,
+    textScaleFactor: 0.75,
     style: textStyle(
       size: size,
       wordSpacing: wordSpacing,
@@ -105,6 +113,7 @@ Widget text({
       overflow: overflow,
       textBaseline: textBaseline,
       height: height,
+      decoration: decoration,
     ),
   );
 }
@@ -122,6 +131,7 @@ TextStyle textStyle({
   TextOverflow? overflow,
   TextBaseline? textBaseline,
   double? height,
+  TextDecoration? decoration,
 }) {
   assert(() {
     if (weight != null && fontWeight != null) {
@@ -138,13 +148,14 @@ TextStyle textStyle({
   }
 
   return TextStyle(
-    fontSize: size,
-    color: color,
-    fontFamily: fontFamily,
-    fontWeight: fontWeight,
-    wordSpacing: wordSpacing,
-    letterSpacing: letterSpacing,
-    textBaseline: textBaseline,
-    height: height,
+      fontSize: size,
+      color: color,
+      fontFamily: fontFamily,
+      fontWeight: fontWeight,
+      wordSpacing: wordSpacing,
+      letterSpacing: letterSpacing,
+      textBaseline: textBaseline,
+      height: height,
+      decoration: decoration,
   );
 }

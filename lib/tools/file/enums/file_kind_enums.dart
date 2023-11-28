@@ -3,7 +3,7 @@ enum FileKindEnums {
   image(kinds: ["jpg", "jpeg", "png", "gif", "bmp"]),
   ppt(kinds: ["ppt", "potx", "pptm"]),
   excel(kinds: ["xls", "xlsx", "xlsm", "xlsb"]),
-  word(kinds: ["doc", "docx", "docm"]),
+  word(kinds: ["doc", "docx", "docm", "csv"]),
   txt(kinds: ["txt"]),
   compress(kinds: ["zip", "rar", "7z", "gz", "tar", "dmg"]),
   ;
