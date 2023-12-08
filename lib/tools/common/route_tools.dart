@@ -21,7 +21,10 @@ void back<T>({T? result}) => Get.back(result: result);
 
 // back more page
 void moreBack<T>({required int step, T? result}) => {
-      for (int i = 0; i < step; i++) {Get.back(result: result)}
+      for (int i = 0; i < step; i++)
+        {
+          Get.back(result: result),
+        }
     };
 
 // Exit the current interface and jump to another page
@@ -33,7 +36,7 @@ Future off({
   return Get.off(page, transition: transition, binding: controllerBinding);
 }
 
-// Exit all interface and jump to another page
+// Exit all interface awnd jump to another page
 Future allOff({
   required Widget page,
   Transition? transition,

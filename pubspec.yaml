@@ -13,7 +13,7 @@ dependencies:
   get: ^4.6.6
   get_storage: ^2.1.1
   flutter_screenutil: ^5.9.0
-  dio: ^5.3.4
+  dio: ^5.4.0
   flustars: ^2.0.1
   nanoid: ^1.0.0
   uuid: ^4.2.1

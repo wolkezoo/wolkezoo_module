@@ -2,8 +2,8 @@ import 'package:permission_handler/permission_handler.dart';
 
 /// 权限工具
 class PermissionTools {
-  static Future<Map<Permission, PermissionStatus>> applyPermission(
-      List<Permission> permissionList) async {
+
+  static Future<Map<Permission, PermissionStatus>> applyPermission(List<Permission> permissionList) async {
     return await permissionList.request();
   }
 

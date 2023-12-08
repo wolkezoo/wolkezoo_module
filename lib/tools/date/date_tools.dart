@@ -1,4 +1,3 @@
-import 'package:flustars/flustars.dart';
 import 'package:get_time_ago/get_time_ago.dart';
 import 'package:intl/intl.dart';
 import 'package:ntp/ntp.dart';
@@ -53,7 +52,7 @@ class DateTools {
         }
       }
     } catch (e) {
-      "获取网络时间失败 >> $e".info;
+      "获取网络时间失败、重新获取网络时间 >> $e".info;
       return DateTime.now();
     }
   }
@@ -73,10 +72,11 @@ class DateTools {
     String hours = duration.inHours.toString().padLeft(2, '0');
     String minutes = duration.inMinutes.remainder(60).toString().padLeft(2, '0');
     String seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
-    if (ObjectTools.isEmpty(hours)) {
+
+    if (isEmpty(hours)) {
       return "$minutes:$seconds";
     }
-    if(hours == "00" && simpleHours != null && simpleHours){
+    if (hours == "00" && simpleHours != null && simpleHours) {
       return "$minutes:$seconds";
     }
     return "$hours:$minutes:$seconds";

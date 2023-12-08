@@ -136,7 +136,7 @@ extension ContainerExtension on Widget {
   /// )
   @Deprecated('未完成')
   List<Widget> cycle({int? cycles, List<Map<String, dynamic>>? loopData}) {
-    if (ObjectTools.isEmpty(cycles) && ObjectTools.isEmpty(loopData)) {
+    if (isEmpty(cycles) && isEmpty(loopData)) {
       throw Exception(
         "cycle error, the cycles and loopData pick one of two，cannot exist at the same time",
       );
@@ -145,13 +145,13 @@ extension ContainerExtension on Widget {
 
     "toDiagnosticsNode().toTimelineArguments() >> ${toDiagnosticsNode().toJsonMap(DiagnosticsSerializationDelegate())}".info;
 
-    if (ObjectTools.isNotEmpty(cycles)) {
+    if (isNotEmpty(cycles)) {
       for (var i in Iterable.generate(cycles!)) {
         result.add(this);
       }
     }
 
-    if (ObjectTools.isNotEmpty(loopData)) {
+    if (isNotEmpty(loopData)) {
       result = loopData!.map((e) => this).toList();
     }
 

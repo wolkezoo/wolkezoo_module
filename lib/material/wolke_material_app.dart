@@ -16,8 +16,12 @@ class WolkeMaterialApp extends StatelessWidget {
   final Bindings? bindings;
   final ThemeData? theme;
 
+  final Translations? translations;
+  final Locale? locale;
+  final Locale? fallbackLocale;
+
   const WolkeMaterialApp({
-    Key? key,
+    super.key,
     required this.designSize,
     required this.home,
     required this.title,
@@ -25,7 +29,10 @@ class WolkeMaterialApp extends StatelessWidget {
     this.debugShowCheckedModeBanner = false,
     this.bindings,
     this.theme,
-  }) : super(key: key);
+    this.translations,
+    this.locale,
+    this.fallbackLocale,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +48,9 @@ class WolkeMaterialApp extends StatelessWidget {
         debugShowCheckedModeBanner: debugShowCheckedModeBanner,
         home: home,
         title: title,
+        translations: translations,
+        locale: locale,
+        fallbackLocale: fallbackLocale,
         builder: (context, child) => Overlay(
           initialEntries: [
             if (child != null) ...[

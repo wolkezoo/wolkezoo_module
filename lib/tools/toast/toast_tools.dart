@@ -4,6 +4,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:wolkezoo_module/component/text/wolke_text.dart';
 
+/// 吐司弹框
+Future<bool?> toast(String input) async => Fluttertoast.showToast(msg: input);
+
 class ToastTools {
   factory ToastTools() => _getInstance();
   static ToastTools? _instance;
@@ -20,9 +23,16 @@ class ToastTools {
     fToast.init(Get.context!);
   }
 
-  static showToast(String msg) {
-    return Fluttertoast.showToast(msg: msg);
-  }
+  // static showToast(String msg) {
+  //   toastification.show(
+  //     context: Get.context!,
+  //     alignment: Alignment.bottomCenter,
+  //     title:  msg,
+  //     type: ToastificationType.info,
+  //     style: ToastificationStyle.simple,
+  //     autoCloseDuration: Duration(seconds: 3),
+  //   );
+  // }
 
   showContextToast(
     String msg, {

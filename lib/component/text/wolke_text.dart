@@ -52,11 +52,13 @@ Widget textSplit({
   EllipsisTextType? ellipsisType,
   String? ellipsis,
   TextDecoration? decoration,
+  double textScaleFactor = 1,
 }) {
   return EllipsizedText(
     text,
     ellipsis: ellipsis ?? "...",
     type: EllipsisType.fromString(ellipsisType != null ? ellipsisType.name : EllipsisType.end.name),
+    textScaleFactor: textScaleFactor,
     style: textStyle(
       size: size,
       wordSpacing: wordSpacing,
@@ -92,6 +94,7 @@ Widget text({
   double? height,
   int? maxLines,
   TextDecoration? decoration,
+  double textScaleFactor = 1,
 }) {
   return Text(
     text,
@@ -100,7 +103,7 @@ Widget text({
     textAlign: textAlign,
     key: key,
     maxLines: maxLines,
-    textScaleFactor: 0.75,
+    textScaleFactor: textScaleFactor,
     style: textStyle(
       size: size,
       wordSpacing: wordSpacing,
@@ -148,14 +151,14 @@ TextStyle textStyle({
   }
 
   return TextStyle(
-      fontSize: size,
-      color: color,
-      fontFamily: fontFamily,
-      fontWeight: fontWeight,
-      wordSpacing: wordSpacing,
-      letterSpacing: letterSpacing,
-      textBaseline: textBaseline,
-      height: height,
-      decoration: decoration,
+    fontSize: size,
+    color: color,
+    fontFamily: fontFamily,
+    fontWeight: fontWeight,
+    wordSpacing: wordSpacing,
+    letterSpacing: letterSpacing,
+    textBaseline: textBaseline,
+    height: height,
+    decoration: decoration,
   );
 }
