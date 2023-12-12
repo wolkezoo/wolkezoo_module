@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:wolkezoo_module/component/text/wolke_text.dart';
 
 /// 吐司弹框
-Future<bool?> toast(String input) async => Fluttertoast.showToast(msg: input);
+Future<bool?> toast(String input) async => await Fluttertoast.showToast(msg: input);
 
 class ToastTools {
   factory ToastTools() => _getInstance();

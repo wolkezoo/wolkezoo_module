@@ -51,6 +51,12 @@ class DioTools {
     _getInstance(showLoading: false);
   }
 
+  static void changerInterfaceAddressConfig({required InterfaceAddressConfig interfaceAddressConfig0}){
+    // 检查接口配置
+    interfaceAddressConfig0.examineConfig();
+
+  }
+
   static DioTools _getInstance({
     String? baseUrl,
     bool? showLoading,

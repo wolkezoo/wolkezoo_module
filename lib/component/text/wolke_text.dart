@@ -1,6 +1,27 @@
 import 'package:ellipsized_text/ellipsized_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class WolkeFont {
+  factory WolkeFont({double? textScaleFactor0}) => _getInstance(textScaleFactor0: textScaleFactor0);
+  static WolkeFont? _instance;
+
+  late RxDouble textScaleFactor;
+
+  static WolkeFont _getInstance({double? textScaleFactor0}) {
+    _instance ??= WolkeFont._init();
+    return _instance!;
+  }
+
+  WolkeFont._init({double? textScaleFactor0}) {
+    textScaleFactor = (textScaleFactor0 ?? 1).obs;
+  }
+
+  changTextScaleFactor(double textScaleFactor0) {
+    textScaleFactor.value = textScaleFactor0;
+  }
+}
 
 // Ellipsis types
 enum EllipsisTextType {
@@ -52,13 +73,13 @@ Widget textSplit({
   EllipsisTextType? ellipsisType,
   String? ellipsis,
   TextDecoration? decoration,
-  double textScaleFactor = 1,
+  double? textScaleFactor,
 }) {
   return EllipsizedText(
     text,
     ellipsis: ellipsis ?? "...",
     type: EllipsisType.fromString(ellipsisType != null ? ellipsisType.name : EllipsisType.end.name),
-    textScaleFactor: textScaleFactor,
+    textScaleFactor: textScaleFactor ?? WolkeFont().textScaleFactor.value,
     style: textStyle(
       size: size,
       wordSpacing: wordSpacing,
@@ -94,7 +115,7 @@ Widget text({
   double? height,
   int? maxLines,
   TextDecoration? decoration,
-  double textScaleFactor = 1,
+  double? textScaleFactor,
 }) {
   return Text(
     text,
@@ -103,7 +124,7 @@ Widget text({
     textAlign: textAlign,
     key: key,
     maxLines: maxLines,
-    textScaleFactor: textScaleFactor,
+    textScaleFactor: textScaleFactor ?? WolkeFont().textScaleFactor.value,
     style: textStyle(
       size: size,
       wordSpacing: wordSpacing,
