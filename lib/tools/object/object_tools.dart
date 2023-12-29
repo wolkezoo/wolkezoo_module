@@ -7,6 +7,10 @@ bool isNotEmpty(Object? input) => ObjectUtil.isNotEmpty(input);
 /// 为空
 bool isEmpty(Object? input) => !isNotEmpty(input);
 
+bool equals(Object a, Object b){
+  return a == b;
+}
+
 // ----------------------------------- Convert Type -------------------------------------------------
 
 T _defaultValue<T>(T? defaultValue, String callBackErrorMessage) {

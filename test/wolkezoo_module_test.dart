@@ -6,6 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:wolkezoo_module/extension/log_extension.dart';
 import 'package:wolkezoo_module/tools/dio/dio_tools.dart';
 import 'package:wolkezoo_module/tools/file/file_tools.dart';
+import 'package:wolkezoo_module/tools/optional/optional.dart';
+import 'package:wolkezoo_module/tools/optional/optional_exception.dart';
 import 'package:wolkezoo_module/tools/regex/regex_tools.dart';
 import 'package:wolkezoo_module/tools/security/security_tools.dart';
 import 'package:wolkezoo_module/wolkezoo_module.dart';
@@ -18,8 +20,38 @@ class Test {
 }
 
 void main() {
+
+  int get(String name){
+    print(name+"执行了该方法");
+    return 1;
+  }
+
   test('adds one to input values', () async {
-    print(toBool("2", defaultValue: false));
+    List? aa = null;
+    print(Optional.ofNullable(aa).orElse(["ERROR"]));
+    // Optional optional = Optional.ofNullable(null);
+    // print('optional >> ${optional.isPresent()}');
+    // optional.ifPresent((value) {
+    //   print("object >> $value");
+    // });
+
+    // List<Map<String, dynamic>> param = [
+    //   {"name": "aaa", "age": 30},
+    //   {"name": "bbb", "age": 48},
+    // ];
+    //
+    // print('${ Optional.ofNullable(param[1]).filter((element) => element["age"] > 30).map((element) => element["name"]).get()}');
+
+    // Optional op = Optional.ofNullable(null);
+    // Optional<int> op1 = Optional.of(1234);
+
+    // print('== >> ${op == op1}');
+
+    // print(op[23456]);
+    // print('Optional.ofNullable(12345).orElse(get("orElse")) >> ${Optional.ofNullable(null).orElseThrow(() => NullException())}');
+
+    // optional.filter((element) => false);
+    // print(toBool("2", defaultValue: false));
     // DioTools().get(url: "url");
     //print(SecurityTools.decodeByAES(encryptionKey: "+hczLwkyDf0pwccrycU0Kn/4d7oiRWtGfMWwNbde5tE=", decodeData: "4WFScscSEOROzM435ntxfEDkN7KXUCixvA0bpWLlogdh82700tiInVjnF5aKSkdPgRsaHmHh+d9bSJbC4FAoNA=="));
     // print(json.decode("{\"code\": 500, \"msg\": \"token已被顶下线\", \"data\": null}"));

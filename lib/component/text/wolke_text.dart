@@ -10,7 +10,7 @@ class WolkeFont {
   late RxDouble textScaleFactor;
 
   static WolkeFont _getInstance({double? textScaleFactor0}) {
-    _instance ??= WolkeFont._init();
+    _instance ??= WolkeFont._init(textScaleFactor0: textScaleFactor0);
     return _instance!;
   }
 

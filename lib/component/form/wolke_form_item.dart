@@ -26,6 +26,7 @@ class WolkeFormItem extends StatelessWidget {
   final int? maxLines;
   final TextStyle? inputTextStyle;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
 
   const WolkeFormItem({
     super.key,
@@ -47,6 +48,7 @@ class WolkeFormItem extends StatelessWidget {
     this.maxLines,
     this.inputTextStyle,
     this.prefixIcon,
+    this.suffixIcon,
     EdgeInsets? outerRingPadding,
   }) : outerRingPadding =
             outerRingPadding ?? const EdgeInsets.only(left: 20, right: 20);
@@ -88,6 +90,7 @@ class WolkeFormItem extends StatelessWidget {
             borderSide: BorderSide(color: borderColor ?? Colors.black),
           ),
           prefixIcon: prefixIcon,
+          suffixIcon: suffixIcon,
         ),
       ),
     );
