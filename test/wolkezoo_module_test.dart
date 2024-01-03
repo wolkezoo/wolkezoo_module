@@ -10,6 +10,7 @@ import 'package:wolkezoo_module/tools/optional/optional.dart';
 import 'package:wolkezoo_module/tools/optional/optional_exception.dart';
 import 'package:wolkezoo_module/tools/regex/regex_tools.dart';
 import 'package:wolkezoo_module/tools/security/security_tools.dart';
+import 'package:wolkezoo_module/tools/utils/str_util.dart';
 import 'package:wolkezoo_module/wolkezoo_module.dart';
 
 
@@ -27,8 +28,11 @@ void main() {
   }
 
   test('adds one to input values', () async {
-    List? aa = null;
-    print(Optional.ofNullable(aa).orElse(["ERROR"]));
+    List<String> a =  ["", "a     ", "b"];
+    StrUtil.trim(a);
+    print('a >> $a');
+    // List? aa = null;
+    // print(Optional.ofNullable(aa).orElse(["ERROR"]));
     // Optional optional = Optional.ofNullable(null);
     // print('optional >> ${optional.isPresent()}');
     // optional.ifPresent((value) {

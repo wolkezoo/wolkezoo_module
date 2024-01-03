@@ -143,7 +143,7 @@ final class Optional<T> {
     return _value != null ? _value as T : other;
   }
 
-  T operator [](T other){
+  T operator [](T other) {
     return _value != null ? _value as T : other;
   }
 
