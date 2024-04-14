@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:basic_utils/basic_utils.dart';
 import 'package:cryptography/cryptography.dart';
 import 'package:encrypt/encrypt.dart';
-import 'package:wolkezoo_module/extension/log_extension.dart';
 
 /// security tools
 /// contains encryption and decryption

@@ -9,7 +9,7 @@ Future to({
   dynamic arguments,
 }) async {
   return Get.to(
-    page,
+    () => page,
     transition: transition,
     binding: controllerBinding,
     arguments: arguments,
@@ -23,9 +23,22 @@ void back<T>({T? result}) => Get.back(result: result);
 void moreBack<T>({required int step, T? result}) => {
       for (int i = 0; i < step; i++)
         {
-          Get.back(result: result),
+          if (i == step - 1) Get.back(result: result) else Get.back(),
         }
     };
+
+Future moreOffTo({
+  required int offStep,
+  required Widget page,
+  Transition? transition,
+  dynamic arguments,
+}) {
+  for (int i = 0; i < offStep; i++) {
+    Get.back();
+  }
+
+  return to(page: page, transition: transition, arguments: arguments);
+}
 
 // Exit the current interface and jump to another page
 Future off({
@@ -33,14 +46,14 @@ Future off({
   Transition? transition,
   dynamic arguments,
 }) async {
-  return Get.off(page, transition: transition, binding: controllerBinding);
+  return Get.off(() => page, transition: transition, binding: controllerBinding);
 }
 
-// Exit all interface awnd jump to another page
+// Exit all interface and jump to another page
 Future allOff({
   required Widget page,
   Transition? transition,
   dynamic arguments,
 }) async {
-  return Get.offAll(page, transition: transition, binding: controllerBinding);
+  return Get.offAll(() => page, transition: transition, binding: controllerBinding);
 }

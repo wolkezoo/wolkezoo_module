@@ -92,7 +92,7 @@ final class Optional<T> {
   }
 
   Optional<T> filter(ElementPredicate<T> predicate) {
-    requireNonNull(predicate);
+    _requireNonNull(predicate);
 
     if (!isPresent()) {
       return this;
@@ -129,7 +129,7 @@ final class Optional<T> {
   /// otherwise an empty {@code Optional}
   /// @throws NullPointerException if the mapping function is null
   Optional<U> map<U>(ElementMapperFunction<U, T> mapper) {
-    requireNonNull(mapper);
+    _requireNonNull(mapper);
 
     if (!isPresent()) {
       return empty();
@@ -171,7 +171,7 @@ final class Optional<T> {
   @override
   int get hashCode => _value.hashCode;
 
-  void requireNonNull(dynamic obj) {
+  void _requireNonNull(dynamic obj) {
     if (obj == null) {
       throw NullException();
     }

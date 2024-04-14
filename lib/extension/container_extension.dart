@@ -1,15 +1,21 @@
-import 'package:flustars/flustars.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wolkezoo_module/component/widget/common_widget.dart';
 import 'package:wolkezoo_module/extension/log_extension.dart';
 import 'package:wolkezoo_module/tools/common/route_tools.dart';
+import 'package:wolkezoo_module/tools/function/function_tools.dart';
 import 'package:wolkezoo_module/tools/object/object_tools.dart';
+import 'package:wolkezoo_module/extension/function_extension.dart';
 
 enum MoveDirection { left, right }
 
+enum ClickType { none, throttle, throttleWithTimeout, debounce }
+
 // extension wight
 extension ContainerExtension on Widget {
+  Widget get obx => Obx(() => this);
+
   /// 组件点击事件
   Widget click({
     Function()? onTap,
@@ -22,6 +28,8 @@ extension ContainerExtension on Widget {
     double leftMoveOffset = 120,
     double rightMoveOffset = -120,
     HitTestBehavior? behavior,
+    ClickType clickType = ClickType.none,
+    int? timeout,
   }) {
     Offset initialSwipeOffset = Offset.zero;
     Offset finalSwipeOffset = Offset.zero;
@@ -66,7 +74,21 @@ extension ContainerExtension on Widget {
       onLongPress: onLongPress,
       onLongPressEnd: onLongPressEnd,
       onDoubleTap: onDoubleTap,
-      onTap: onTap,
+      onTap: () {
+        if (clickType == ClickType.throttle) {
+          onTap?.throttle("widget-click");
+          return;
+        }
+        if (clickType == ClickType.throttleWithTimeout) {
+          onTap?.throttleWithTimeout("widget-click", timeout: timeout);
+          return;
+        }
+        if (clickType == ClickType.debounce) {
+          onTap?.debounce("widget-click", timeout: timeout);
+          return;
+        }
+        onTap?.call();
+      },
       child: this,
     );
   }
@@ -74,9 +96,10 @@ extension ContainerExtension on Widget {
   /// 返回事件
   Widget backTap({
     Object? result,
+    int step = 1,
   }) {
     return GestureDetector(
-      onTap: () => back(result: result),
+      onTap: () => moreBack(step: step, result: result),
       child: this,
     );
   }

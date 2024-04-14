@@ -22,6 +22,7 @@ class WolkeFormItem extends StatelessWidget {
   final Function(String)? onSubmitted;
   final TextInputType? keyboardType;
   final double? height;
+  final double? width;
   final TextInputAction? textInputAction;
   final int? maxLines;
   final TextStyle? inputTextStyle;
@@ -42,6 +43,7 @@ class WolkeFormItem extends StatelessWidget {
     this.controller,
     this.keyboardType,
     this.height,
+    this.width,
     this.contentPadding,
     this.textInputAction,
     this.onSubmitted,
@@ -56,6 +58,7 @@ class WolkeFormItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: width,
       height: height,
       padding: outerRingPadding,
       child: TextField(

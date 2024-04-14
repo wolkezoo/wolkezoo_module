@@ -1,4 +1,4 @@
-import 'package:wolkezoo_module/tools/storage/storage_tools.dart';
+import 'package:wolkezoo_module/tools/storage/unsafe/storage_tools.dart';
 
 /// 缓存扩展类
 extension StorageExtension on String {

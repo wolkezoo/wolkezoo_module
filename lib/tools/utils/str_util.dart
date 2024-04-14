@@ -1,6 +1,27 @@
 import 'package:wolkezoo_module/tools/object/object_tools.dart';
 
 class StrUtil {
+  static String lnPermutation(List<String?> strs, {bool? ignore, String? defaultValue}) {
+    if (strs.isEmpty) {
+      return "";
+    }
+
+    StringBuffer stringBuffer = StringBuffer();
+    for (String? str in strs) {
+      if (isEmpty(str) && (ignore ?? false)) {
+        continue;
+      }
+      if (isEmpty(str) && isNotEmpty(defaultValue)) {
+        str = defaultValue!;
+      } else {
+        str ?? "";
+      }
+      stringBuffer.writeln(str);
+    }
+
+    return stringBuffer.toString();
+  }
+
   /// 给定字符串数组全部做去首尾空格
   ///
   /// @param strs 字符串数组

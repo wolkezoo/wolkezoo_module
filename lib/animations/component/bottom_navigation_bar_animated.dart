@@ -29,16 +29,14 @@ class BottomNavigationBarAnimated extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: List.generate(
             itemCount,
-            (index) => Container(
-              child: activeIndex == index
-                  ? Bounce(
-                      duration: const Duration(milliseconds: 800),
-                      animate: activeIndex == index,
-                      from: 10,
-                      child: builder(index, activeIndex == index),
-                    )
-                  : builder(index, activeIndex == index),
-            ).click(
+            (index) => activeIndex == index
+                ? Bounce(
+                    duration: const Duration(milliseconds: 800),
+                    animate: activeIndex == index,
+                    from: 10,
+                    child: builder(index, activeIndex == index),
+                  )
+                : builder(index, activeIndex == index).click(
               behavior: HitTestBehavior.opaque,
               onTap: () {
                 onTap.call(index);

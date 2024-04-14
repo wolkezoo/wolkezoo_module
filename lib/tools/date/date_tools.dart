@@ -2,6 +2,7 @@ import 'package:get_time_ago/get_time_ago.dart';
 import 'package:intl/intl.dart';
 import 'package:ntp/ntp.dart';
 import 'package:wolkezoo_module/extension/log_extension.dart';
+import 'package:wolkezoo_module/tools/date/config/date_formats.dart';
 import 'package:wolkezoo_module/tools/object/object_tools.dart';
 import 'package:wolkezoo_module/tools/random/random_tools.dart';
 
@@ -64,7 +65,7 @@ class DateTools {
   }
 
   /// 时间前
-  static String timeAgo(DateTime time, {String local = "zh", String pattern = "yyyy/MM/dd"}) {
+  static String timeAgo(DateTime time, {String local = "zh", String pattern = DateFormats.param_y_m_d}) {
     return GetTimeAgo.parse(time, locale: local, pattern: pattern);
   }
 

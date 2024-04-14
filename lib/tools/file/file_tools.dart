@@ -5,8 +5,23 @@ import 'package:crypto/crypto.dart' as crypto;
 
 import 'package:basic_utils/basic_utils.dart';
 import 'package:crypto/crypto.dart';
+import 'package:wolkezoo_module/extension/log_extension.dart';
 import 'package:wolkezoo_module/tools/dir/extension/dir_extension.dart';
+import 'package:wolkezoo_module/tools/object/object_tools.dart';
 import 'package:xxh3/xxh3.dart';
+
+enum FileSizeKindEnum {
+  byte("B"),
+  kb("KB"),
+  mb("MB"),
+  gb("GB"),
+  tb("TB"),
+  ;
+
+  const FileSizeKindEnum(this.suffix);
+
+  final String suffix;
+}
 
 class FileTools {
   static Future<String?> getFileChecksumByPath({required String filePath}) async {
@@ -33,7 +48,7 @@ class FileTools {
     try {
       final hash = await md5.bind(stream).first;
       return hash.toString();
-    } catch(exception) {
+    } catch (exception) {
       return null;
     }
   }
@@ -42,7 +57,7 @@ class FileTools {
     try {
       final pieceMd5 = crypto.md5.convert(byteList).toString();
       return pieceMd5;
-    } catch(exception) {
+    } catch (exception) {
       return null;
     }
   }
@@ -51,17 +66,66 @@ class FileTools {
   static String? getFileXXHash({required File file}) {
     try {
       final stream = file.readAsBytesSync();
-      ByteData xxh3Unit8 = ByteData(8)
-        ..setUint64(0, xxh3(stream));
-       return HexUtils.encode(xxh3Unit8.buffer.asUint8List(0));
-    } catch(exception) {
-      print(exception);
+      ByteData xxh3Unit8 = ByteData(8)..setUint64(0, xxh3(stream));
+      return HexUtils.encode(xxh3Unit8.buffer.asUint8List(0));
+    } catch (exception) {
+      "exception >> $exception".info;
       return null;
     }
   }
 
+  static String convertFilesize(dynamic size,
+      {int round = 2, bool showSuffix = true, FileSizeKindEnum sizeKindEnum = FileSizeKindEnum.byte}) {
+    try {
+      toInt(size);
+    } catch (e) {
+      return size;
+    }
+    /**
+     * [size] can be passed as number or as string
+     *
+     * the optional parameter [round] specifies the number
+     * of digits after comma/point (default is 2)
+     */
+    var divider = 1024;
+    int size0;
+    try {
+      size0 = int.parse(size.toString());
+    } catch (e) {
+      throw ArgumentError('Can not parse the size parameter: $e');
+    }
+
+    double convertSize0 = double.parse(size0.toString());
+    switch (sizeKindEnum) {
+      case FileSizeKindEnum.byte:
+        break;
+      case FileSizeKindEnum.kb:
+        convertSize0 = (size0 / divider);
+        break;
+      case FileSizeKindEnum.mb:
+        convertSize0 = (size0 / divider / divider);
+        break;
+      case FileSizeKindEnum.gb:
+        convertSize0 = (size0 / divider / divider / divider);
+        break;
+      case FileSizeKindEnum.tb:
+        convertSize0 = (size0 / divider / divider / divider / divider);
+        break;
+    }
+
+    if (size0 % divider == 0) {
+      return showSuffix ? "${convertSize0.toStringAsFixed(0)} ${sizeKindEnum.suffix}" : convertSize0.toStringAsFixed(0);
+    }
+    return showSuffix ? "${convertSize0.toStringAsFixed(round)} ${sizeKindEnum.suffix}" : convertSize0.toStringAsFixed(round);
+  }
+
   /// 获取可读文件大小
-  static String filesize(dynamic size, [int round = 2]) {
+  static String filesize(dynamic size, {int round = 2, bool showSuffix = true}) {
+    try {
+      toInt(size);
+    } catch (e) {
+      return size;
+    }
     /**
      * [size] can be passed as number or as string
      *
@@ -77,49 +141,55 @@ class FileTools {
     }
 
     if (size0 < divider) {
-      return '$size0 B';
+      return showSuffix ? '$size0 B' : toStr(size0);
     }
 
     if (size0 < divider * divider && size0 % divider == 0) {
-      return '${(size0 / divider).toStringAsFixed(0)} KB';
+      String size1 = (size0 / divider).toStringAsFixed(0);
+      return showSuffix ? '$size1 KB' : size1;
     }
 
     if (size0 < divider * divider) {
-      return '${(size0 / divider).toStringAsFixed(round)} KB';
+      String size1 = (size0 / divider).toStringAsFixed(round);
+      return showSuffix ? '$size1 KB' : size1;
     }
 
     if (size0 < divider * divider * divider && size0 % divider == 0) {
-      return '${(size0 / (divider * divider)).toStringAsFixed(0)} MB';
+      String size1 = (size0 / (divider * divider)).toStringAsFixed(0);
+      return showSuffix ? '$size1 MB' : size1;
     }
 
     if (size0 < divider * divider * divider) {
-      return '${(size0 / divider / divider).toStringAsFixed(round)} MB';
+      String size1 = (size0 / divider / divider).toStringAsFixed(round);
+      return showSuffix ? '$size1 MB' : size1;
     }
 
     if (size0 < divider * divider * divider * divider && size0 % divider == 0) {
-      return '${(size0 / (divider * divider * divider)).toStringAsFixed(0)} GB';
+      String size1 = (size0 / (divider * divider * divider)).toStringAsFixed(0);
+      return showSuffix ? '$size1 GB' : size1;
     }
 
     if (size0 < divider * divider * divider * divider) {
-      return '${(size0 / divider / divider / divider).toStringAsFixed(round)} GB';
+      String size1 = (size0 / divider / divider / divider).toStringAsFixed(round);
+      return showSuffix ? '$size1 GB' : size1;
     }
 
     if (size0 < divider * divider * divider * divider * divider && size0 % divider == 0) {
       num r = size0 / divider / divider / divider / divider;
-      return '${r.toStringAsFixed(0)} TB';
+      return showSuffix ? '${r.toStringAsFixed(0)} TB' : r.toStringAsFixed(0);
     }
 
     if (size0 < divider * divider * divider * divider * divider) {
       num r = size0 / divider / divider / divider / divider;
-      return '${r.toStringAsFixed(round)} TB';
+      return showSuffix ? '${r.toStringAsFixed(round)} TB' : r.toStringAsFixed(round);
     }
 
     if (size0 < divider * divider * divider * divider * divider * divider && size0 % divider == 0) {
       num r = size0 / divider / divider / divider / divider / divider;
-      return '${r.toStringAsFixed(0)} PB';
+      return showSuffix ? '${r.toStringAsFixed(0)} PB' : r.toStringAsFixed(0);
     } else {
       num r = size0 / divider / divider / divider / divider / divider;
-      return '${r.toStringAsFixed(round)} PB';
+      return showSuffix ? '${r.toStringAsFixed(round)} PB' : r.toStringAsFixed(round);
     }
   }
 }

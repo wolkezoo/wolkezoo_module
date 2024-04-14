@@ -7,7 +7,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:wolkezoo_module/extension/log_extension.dart';
 import 'package:wolkezoo_module/tools/date/date_tools.dart';
 import 'package:wolkezoo_module/tools/dio/config/interface_address_config.dart';
-import 'package:wolkezoo_module/tools/storage/storage_tools.dart';
+import 'package:wolkezoo_module/tools/storage/unsafe/storage_tools.dart';
 
 /// Dio 请求方法
 enum DioMethod {

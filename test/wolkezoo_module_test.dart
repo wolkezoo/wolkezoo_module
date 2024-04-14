@@ -1,18 +1,10 @@
-import 'dart:convert';
 import 'dart:io';
+import 'dart:ui';
 
-import 'package:flustars/flustars.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wolkezoo_module/extension/log_extension.dart';
-import 'package:wolkezoo_module/tools/dio/dio_tools.dart';
+import 'package:wolkezoo_module/extension/map_extension.dart';
 import 'package:wolkezoo_module/tools/file/file_tools.dart';
-import 'package:wolkezoo_module/tools/optional/optional.dart';
-import 'package:wolkezoo_module/tools/optional/optional_exception.dart';
-import 'package:wolkezoo_module/tools/regex/regex_tools.dart';
-import 'package:wolkezoo_module/tools/security/security_tools.dart';
-import 'package:wolkezoo_module/tools/utils/str_util.dart';
 import 'package:wolkezoo_module/wolkezoo_module.dart';
-
 
 class Test {
   int? sub;
@@ -21,16 +13,24 @@ class Test {
 }
 
 void main() {
-
-  int get(String name){
-    print(name+"执行了该方法");
+  int get(String name) {
+    print(name + "执行了该方法");
     return 1;
   }
 
   test('adds one to input values', () async {
-    List<String> a =  ["", "a     ", "b"];
-    StrUtil.trim(a);
-    print('a >> $a');
+    print(InternetAddress.loopbackIPv4.address);
+    // List<String> a =  ["a", "", "c"];
+    // print('a >> ${StrUtil.lnPermutation(a, defaultValue: "NULL")}');
+
+    // Map<String, String> aa = {"a": "1", "b": "2", "c": "3"};
+    //
+    // aa.insert<String, String>(3, "d", "4");
+    //
+    // print('aa >> ${aa}');
+
+    // print('FileTools >> ${FileTools.convertFilesize(1083741829, sizeKindEnum: FileSizeKindEnum.gb)}');
+
     // List? aa = null;
     // print(Optional.ofNullable(aa).orElse(["ERROR"]));
     // Optional optional = Optional.ofNullable(null);
